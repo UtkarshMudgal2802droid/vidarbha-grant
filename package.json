@@ -9,7 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@anon-aadhaar/core": "^2.4.3",
+    "@anon-aadhaar/react": "^2.4.3",
+    "@prisma/client": "^7.10.0",
+    "@types/better-sqlite3": "^9.6.0",
+    "better-sqlite3": "^13.0.3",
     "next": "16.3.5",
+    "prisma": "^8.0.0-rc.13",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

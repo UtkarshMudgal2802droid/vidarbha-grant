@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vidarbha Education Grant - Intake Portal
+
+This is the intake portal for the Vidarbha Education Grant. It allows applicants to verify their identity and eligibility using zero-knowledge proofs (Anon Aadhaar) without ever sharing their actual Aadhaar number.
+
+## Prerequisites
+
+1. Node.js v20.12 or newer.
+2. A modern web browser.
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Configure Environment:**
+   Copy the example environment file and set your secure `APP_SEED`:
+   ```bash
+   cp .env.example .env
+   ```
+   *Make sure `APP_SEED` and `NEXT_PUBLIC_APP_SEED` match in `.env`.*
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. **Access the portal:**
+   - Applicant form: [http://localhost:3000](http://localhost:3000)
+   - Admin dashboard (for volunteers): [http://localhost:3000/admin](http://localhost:3000/admin)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How It Works
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Eligibility Check:** The portal checks that the applicant is at least 18 years old.
+- **One Claim Per Human:** Each person can only apply once. The application derives a unique `nullifier` from the applicant's Aadhaar that is stored to prevent duplicates.
+- **Data Privacy:** Raw Aadhaar data, QR codes, and personal details never leave the applicant's browser. Only a cryptographic proof is sent to the server.
