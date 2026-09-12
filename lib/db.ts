@@ -2,7 +2,12 @@ import Database from 'better-sqlite3';
 import path from 'path';
 
 // Connect to SQLite DB
-const dbPath = path.join(process.cwd(), 'dev.db');
+const dbUrl = process.env.DATABASE_URL;
+if (!dbUrl) {
+  throw new Error("Server configuration error: DATABASE_URL missing");
+}
+const filename = dbUrl.startsWith('file:') ? dbUrl.slice(5) : dbUrl;
+const dbPath = path.resolve(process.cwd(), filename);
 const db = new Database(dbPath);
 
 // Initialize the Database Table
